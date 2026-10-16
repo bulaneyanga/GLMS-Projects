@@ -1,0 +1,15 @@
+@model IEnumerable<Contract>
+@{ ViewData["Title"] = "Contracts"; }
+<div class="page-head"><div><div class="eyebrow">Agreement hub</div><h1>Contracts</h1><p class="muted">Track client agreements, status, service levels, and signed documents.</p></div><a class="button" asp-action="Create">Add contract</a></div>
+<div class="panel">
+    <form asp-action="Index" method="get" class="filter-row filters">
+        <div class="field"><label for="status">Status</label><select id="status" name="status" asp-items="Html.GetEnumSelectList<ContractStatus>()"><option value="">All statuses</option></select></div>
+        <div class="field"><label for="from">Overlaps from</label><input id="from" type="date" name="from" value="@ViewBag.From" /></div>
+        <div class="field"><label for="to">Overlaps to</label><input id="to" type="date" name="to" value="@ViewBag.To" /></div>
+        <button class="button small" type="submit">Apply filters</button><a class="button secondary small" asp-action="Index">Clear</a>
+    </form>
+    <div class="table-wrap"><table><thead><tr><th>Client</th><th>Service level</th><th>Dates</th><th>Status</th><th>Agreement</th><th></th></tr></thead><tbody>
+    @foreach (var contract in Model) { var statusClass = contract.Status.ToString().ToLowerInvariant(); <tr><td><strong>@contract.Client?.Name</strong><br /><span class="muted">@contract.Client?.Region</span></td><td>@contract.ServiceLevel</td><td>@contract.StartDate.ToString("dd MMM yyyy") – @contract.EndDate.ToString("dd MMM yyyy")</td><td><span class="badge @statusClass">@Html.DisplayFor(_ => contract.Status)</span></td><td>@if (contract.AgreementStorageKey is not null) { <a asp-action="Download" asp-route-id="@contract.Id">Download PDF</a> } else { <span class="muted">Missing</span> }</td><td><a asp-action="Edit" asp-route-id="@contract.Id">Edit</a></td></tr> }
+    @if (!Model.Any()) { <tr><td colspan="6" class="empty">No matching contracts were found.</td></tr> }
+    </tbody></table></div>
+</div>

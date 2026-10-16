@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] · TechMove GLMS</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/polish.css" asp-append-version="true" />
+</head>
+<body>
+@{ var currentController = ViewContext.RouteData.Values["controller"]?.ToString(); }
+<header class="topbar">
+    <a class="brand" asp-controller="Home" asp-action="Index"><span class="brand-mark">T</span><span>TECHMOVE <small>GLOBAL LOGISTICS</small></span></a>
+    <nav aria-label="Main navigation"><a class="@(currentController == "Clients" ? "active" : "")" aria-current="@(currentController == "Clients" ? "page" : null)" asp-controller="Clients" asp-action="Index">Clients</a><a class="@(currentController == "Contracts" ? "active" : "")" aria-current="@(currentController == "Contracts" ? "page" : null)" asp-controller="Contracts" asp-action="Index">Contracts</a><a class="@(currentController == "ServiceRequests" ? "active" : "")" aria-current="@(currentController == "ServiceRequests" ? "page" : null)" asp-controller="ServiceRequests" asp-action="Index">Service requests</a></nav>
+    <span class="env-pill">OPERATIONS</span>
+</header>
+<main class="container">
+    @RenderBody()
+</main>
+<footer>TechMove Logistics · Global Logistics Management System · Owned by Yanga Bulane</footer>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

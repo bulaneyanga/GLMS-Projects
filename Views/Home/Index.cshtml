@@ -1,0 +1,20 @@
+@{ ViewData["Title"] = "Operations overview"; }
+<section class="hero">
+    <div class="eyebrow">Operations workspace</div>
+    <h1>Keep global freight moving.</h1>
+    <p>Manage client relationships, monitor agreement lifecycles, and coordinate service requests from one central workspace.</p>
+    <a class="button" asp-controller="Contracts" asp-action="Create">Create a contract</a>
+</section>
+<div class="cards">
+    <article class="stat"><span>Registered clients</span><strong>@ViewBag.ClientCount</strong></article>
+    <article class="stat"><span>Managed contracts</span><strong>@ViewBag.ContractCount</strong></article>
+    <article class="stat"><span>Service requests</span><strong>@ViewBag.RequestCount</strong></article>
+</div>
+<div class="panel">
+    <div class="panel-head"><h2>Quick actions</h2><span class="muted">Common operations</span></div>
+    <div class="table-wrap"><table><tbody>
+        <tr><td><strong>Clients</strong><br /><span class="muted">Create and update customer records</span></td><td><a class="button secondary small" asp-controller="Clients" asp-action="Index">Manage clients</a></td></tr>
+        <tr><td><strong>Contracts</strong><br /><span class="muted">Filter contract status and dates, manage signed PDFs</span></td><td><a class="button secondary small" asp-controller="Contracts" asp-action="Index">View contracts</a></td></tr>
+        <tr><td><strong>Service requests</strong><br /><span class="muted">Submit approved work and see USD/ZAR values</span></td><td><a class="button secondary small" asp-controller="ServiceRequests" asp-action="Index">View requests</a></td></tr>
+    </tbody></table></div>
+</div>

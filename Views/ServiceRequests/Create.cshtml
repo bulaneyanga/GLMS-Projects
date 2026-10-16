@@ -1,0 +1,11 @@
+@model ServiceRequestCreateViewModel
+@{ ViewData["Title"] = "New service request"; }
+<div class="page-head"><div><div class="eyebrow">Freight operations</div><h1>New service request</h1><p class="muted">Submit work against an eligible contract and capture the ZAR equivalent.</p></div></div>
+<div class="form-card"><form asp-action="Create" method="post"><div asp-validation-summary="ModelOnly"></div>
+    <div class="field"><label asp-for="ContractId"></label><select asp-for="ContractId"><option value="">Choose a contract</option>@foreach (var contract in (IEnumerable<Contract>)ViewBag.ContractOptions) { <option value="@contract.Id">#@contract.Id · @contract.Client?.Name · @contract.ServiceLevel (@contract.Status)</option> }</select><span asp-validation-for="ContractId" class="validation"></span><div class="field-hint">Expired and On Hold contracts are excluded.</div></div>
+    <div class="field"><label asp-for="Description"></label><textarea asp-for="Description" placeholder="Describe the freight or logistics service required"></textarea><span asp-validation-for="Description" class="validation"></span></div>
+    <div class="field"><label asp-for="AmountUsd"></label><input asp-for="AmountUsd" type="number" min="0.01" step="0.01" placeholder="0.00" /><span asp-validation-for="AmountUsd" class="validation"></span></div>
+    @if (ViewBag.ExchangeRate is decimal rate) { <div class="rate-box" data-exchange-rate="@rate.ToString(System.Globalization.CultureInfo.InvariantCulture)">Live USD/ZAR rate: <strong>1 USD = R @rate.ToString("N4")</strong><br /><span class="field-hint">Estimated total: <strong id="zarPreview">Enter a USD amount</strong></span></div> }
+    else { <div class="rate-box">@(ViewBag.RateError ?? "Rate preview unavailable.")</div> }
+    <div class="form-actions"><button class="button" type="submit">Submit request</button><a class="button secondary" asp-action="Index">Cancel</a></div>
+</form></div>

@@ -1,0 +1,9 @@
+@model Client
+@{ ViewData["Title"] = "Edit client"; }
+<div class="page-head"><div><div class="eyebrow">Customer directory</div><h1>Edit client</h1><p class="muted">Update customer contact details.</p></div></div>
+<div class="form-card"><form asp-action="Edit" asp-route-id="@Model.Id" method="post"><input type="hidden" asp-for="Id" /><div asp-validation-summary="ModelOnly"></div>
+    <div class="field"><label asp-for="Name"></label><input asp-for="Name" /><span asp-validation-for="Name" class="validation"></span></div>
+    <div class="field"><label asp-for="ContactDetails"></label><input asp-for="ContactDetails" /><span asp-validation-for="ContactDetails" class="validation"></span></div>
+    <div class="field"><label asp-for="Region"></label><input asp-for="Region" /><span asp-validation-for="Region" class="validation"></span></div>
+    <div class="form-actions"><button class="button" type="submit">Save changes</button><a class="button secondary" asp-action="Index">Cancel</a></div>
+</form></div>

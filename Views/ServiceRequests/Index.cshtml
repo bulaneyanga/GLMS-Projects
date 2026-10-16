@@ -1,0 +1,7 @@
+@model IEnumerable<ServiceRequest>
+@{ ViewData["Title"] = "Service requests"; }
+<div class="page-head"><div><div class="eyebrow">Freight operations</div><h1>Service requests</h1><p class="muted">Amounts are recorded in ZAR using the live USD conversion rate at submission.</p></div><a class="button" asp-action="Create">New request</a></div>
+<div class="panel"><div class="panel-head"><h2>Submitted work</h2><span class="muted">@Model.Count() requests</span></div><div class="table-wrap"><table><thead><tr><th>Request</th><th>Client · Contract</th><th>Submitted</th><th>USD amount</th><th>Rate</th><th>Cost (ZAR)</th><th>Status</th></tr></thead><tbody>
+@foreach (var request in Model) { <tr><td><strong>@request.Description</strong></td><td>@request.Contract?.Client?.Name<br /><span class="muted">#@request.ContractId · @request.Contract?.ServiceLevel</span></td><td>@request.CreatedUtc.ToLocalTime().ToString("dd MMM yyyy")</td><td>$@request.AmountUsd.ToString("N2")</td><td>@request.ExchangeRate.ToString("N4")</td><td><strong>R @request.CostZar.ToString("N2")</strong></td><td><span class="badge active">@request.Status</span></td></tr> }
+@if (!Model.Any()) { <tr><td colspan="7" class="empty">No service requests have been submitted.</td></tr> }
+</tbody></table></div></div>

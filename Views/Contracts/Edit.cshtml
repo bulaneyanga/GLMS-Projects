@@ -1,0 +1,12 @@
+@model Contract
+@{ ViewData["Title"] = "Edit contract"; }
+<div class="page-head"><div><div class="eyebrow">Agreement hub</div><h1>Edit contract</h1><p class="muted">Update the contract details or lifecycle status.</p></div></div>
+<div class="form-card"><form asp-action="Edit" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data"><input type="hidden" asp-for="Id" /><div asp-validation-summary="ModelOnly"></div>
+    <div class="field"><label asp-for="ClientId"></label><select asp-for="ClientId" asp-items="ViewBag.Clients"><option value="">Choose a client</option></select><span asp-validation-for="ClientId" class="validation"></span></div>
+    <div class="field"><label asp-for="ServiceLevel"></label><input asp-for="ServiceLevel" /><span asp-validation-for="ServiceLevel" class="validation"></span></div>
+    <div class="field"><label asp-for="StartDate"></label><input asp-for="StartDate" /><span asp-validation-for="StartDate" class="validation"></span></div>
+    <div class="field"><label asp-for="EndDate"></label><input asp-for="EndDate" /><span asp-validation-for="EndDate" class="validation"></span></div>
+    <div class="field"><label asp-for="Status"></label><select asp-for="Status" asp-items="Html.GetEnumSelectList<ContractStatus>()"></select><span asp-validation-for="Status" class="validation"></span></div>
+    <div class="field"><label for="agreement">Replace signed agreement (optional PDF)</label><input id="agreement" name="agreement" type="file" accept="application/pdf,.pdf" /><div class="field-hint">Current: @Model.AgreementFileName</div><span class="validation">@Html.ValidationMessage("agreement")</span></div>
+    <div class="form-actions"><button class="button" type="submit">Save changes</button><a class="button secondary" asp-action="Index">Cancel</a></div>
+</form></div>

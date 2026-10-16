@@ -1,0 +1,9 @@
+@model Client
+@{ ViewData["Title"] = "Add client"; }
+<div class="page-head"><div><div class="eyebrow">Customer directory</div><h1>Add client</h1><p class="muted">Create a customer record for TechMove operations.</p></div></div>
+<div class="form-card"><form asp-action="Create" method="post"><div asp-validation-summary="ModelOnly"></div>
+    <div class="field"><label asp-for="Name"></label><input asp-for="Name" /><span asp-validation-for="Name" class="validation"></span></div>
+    <div class="field"><label asp-for="ContactDetails"></label><input asp-for="ContactDetails" placeholder="Email or phone" /><span asp-validation-for="ContactDetails" class="validation"></span></div>
+    <div class="field"><label asp-for="Region"></label><input asp-for="Region" placeholder="e.g. Southern Africa" /><span asp-validation-for="Region" class="validation"></span></div>
+    <div class="form-actions"><button class="button" type="submit">Save client</button><a class="button secondary" asp-action="Index">Cancel</a></div>
+</form></div>
